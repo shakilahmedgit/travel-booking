@@ -1,5 +1,14 @@
+import { FaPlus } from "react-icons/fa";
 
 const Booking = () => {
+
+
+    // handle bookings btn click
+    const handleBook = (e) => {
+        e.preventDefault();
+        console.log('Booking flight');
+    };
+
     return (
         <div className="mt-[160px] md:mt-[140px] lg:mt-[160px] mx-4 relative">
             <div className="bg-white rounded-md mx-auto max-w-6xl w-full">
@@ -58,15 +67,13 @@ const Booking = () => {
                         <p className="font-bold text-black">Travel Class</p>
                         <select name="form" id="form" className="outline-none p-2 w-full">
                             <option value="Please Select">Please Select</option>
-                            <option>Bussines</option>
+                            <option>Business</option>
                             <option>Economy</option>
                         </select>
                     </div>
 
                     {/* button */}
-                    <div className="flex items-center justify-center bg-indigo-600 text-white font-medium md:rounded-br-md lg:rounded-tr-md lg:rounded-br-md py-6 md:py-0">
-                        <button type="submit" className="">Book Now</button>
-                    </div>
+                    <button onClick={(e) => handleBook(e)} type="submit" className="flex justify-center items-center gap-2 bg-indigo-600 text-white font-medium md:rounded-br-md lg:rounded-tr-md lg:rounded-br-md py-6 md:py-0"><FaPlus /> Book Now</button>
                 </form>
             </div>
         </div>
