@@ -1,5 +1,6 @@
 import Booking from "./components/Booking";
 import Header from "./components/Header";
+import Table from "./components/Table";
 
 function App() {
 
@@ -8,7 +9,7 @@ function App() {
       <Header/>
       <section>
         <Booking />
-        <div>Table</div>
+        <Table />
       </section>
     </div>
   )
