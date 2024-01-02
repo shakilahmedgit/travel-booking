@@ -1,12 +1,33 @@
+import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { makeBooking } from "../redux/actions";
 
 const Booking = () => {
 
+    const data = useSelector((state) => state.data);
+    const dispatch = useDispatch();
+    const size = data.length;
+
+    // form info or values stored in useState
+    const [bookingData, setBookingData] = useState({});
+    console.log(bookingData);
+
+    // handle onChange function
+    const handleChange = (e) => {
+        const newBookingData = {...bookingData};
+        newBookingData[e.target.name] = e.target.value;
+        setBookingData(newBookingData);
+    };
 
     // handle bookings btn click
     const handleBook = (e) => {
         e.preventDefault();
-        console.log('Booking flight');
+        if(Object.keys(bookingData).length === 5){
+            dispatch(makeBooking({...bookingData, id: size + 1}));
+        }else{
+            alert('Please select a booking data properly!');
+        }
     };
 
     return (
@@ -17,7 +38,7 @@ const Booking = () => {
                     <div className="py-1.5 px-2.5 flex-1 border-r-2">
                         <p className="font-bold text-black">Destination Form</p>
                         <div className="flex flex-row">
-                            <select name="form" id="form" className="outline-none p-2 w-full">
+                            <select onChange={(e) => handleChange(e)} required name="form" id="form" className="outline-none p-2 w-full">
                                 <option value="Please Select">Please Select</option>
                                 <option>New York</option>
                                 <option>London</option>
@@ -31,7 +52,7 @@ const Booking = () => {
                     <div className="py-1.5 px-2.5 flex-1 border-r-2">
                         <p className="font-bold text-black">Destination Form</p>
                         <div className="flex flex-row">
-                            <select name="form" id="form" className="outline-none p-2 w-full">
+                            <select onChange={(e) => handleChange(e)} required name="to" id="to" className="outline-none p-2 w-full">
                                 <option value="Please Select">Please Select</option>
                                 <option>New York</option>
                                 <option>London</option>
@@ -44,14 +65,14 @@ const Booking = () => {
                     {/* date */}
                     <div className="py-1.5 px-2.5 flex-1 border-r-2 md:border-r-0">
                         <p className="font-bold text-black">Journey Date</p>
-                        <input type="date" name="date" required className="outline-none p-2 w-full" />
+                        <input onChange={(e) => handleChange(e)} type="date" name="date" id="date" required className="outline-none p-2 w-full" />
                     </div>
 
                     {/* Guest member */}
                     <div className="py-1.5 px-2.5 flex-1 border-r-2">
                         <p className="font-bold text-black">Guests</p>
                         <div className="flex flex-row">
-                            <select name="form" id="form" className="outline-none p-2 w-full">
+                            <select onChange={(e) => handleChange(e)} required name="person" id="person" className="outline-none p-2 w-full">
                                 <option value="Please Select">Please Select</option>
                                 <option>1 Person</option>
                                 <option>2 Person</option>
@@ -65,7 +86,7 @@ const Booking = () => {
                     {/* Travel Class */}
                     <div className="py-1.5 px-2.5 flex-1 border-r-2">
                         <p className="font-bold text-black">Travel Class</p>
-                        <select name="form" id="form" className="outline-none p-2 w-full">
+                        <select onChange={(e) => handleChange(e)} required name="categoryName" id="categoryName" className="outline-none p-2 w-full">
                             <option value="Please Select">Please Select</option>
                             <option>Business</option>
                             <option>Economy</option>
